@@ -18,13 +18,13 @@ export default {
   },
   mounted() {
     console.log('插件已注入')
-    if (localStorage.getItem('crawlDownlaod')) {
+    if (localStorage.getItem('crawlDownlaod') === '1') {
       this.getTitleInfo()
     }
   },
   methods: {
     download() {
-      localStorage.setItem('crawlDownlaod', true);
+      localStorage.setItem('crawlDownlaod', '1');
       window.location.reload()
     },
     getTitleInfo() {
@@ -52,9 +52,9 @@ export default {
       } else {
         var blob = new Blob([item], {type: "text/plain;charset=utf-8"});
         saveAs(blob, $('.ipt-wrap input').val() + ".csv");
-        localStorage.setItem('crawlText', undefined);
+        localStorage.setItem('crawlText', '');
         console.log('下载完成')
-        localStorage.setItem('crawlDownlaod', undefined)
+        localStorage.setItem('crawlDownlaod', '0')
       }
     }
   }
