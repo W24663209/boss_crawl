@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="content">
+</div>
+</body>
+
+<script>
+    $(function (){
+        addStatic('content.main.js', function (res) {
+            console.log('添加content.main.js成功')
+        })
+    })
+    //注入项目静态资源到网页中
+    function addStatic(pathName, fun) {
+        let content_url = chrome.extension.getURL(pathName)
+        $.ajax({
+            url: content_url,
+            type: 'get',
+            async: true,
+            success: function (res) {
+                fun(res, content_url)
+            },
+            error: function (response) {
+            }
+        });
+    }
+
+</script>
+</html>
